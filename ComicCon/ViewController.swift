@@ -19,11 +19,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         setUpImageViewAnimation()
-        self.image.layer.cornerRadius = 0.25 * self.image.bounds.size.width
+        self.image.layer.cornerRadius = 0.05 * self.image.bounds.size.width
         self.image.clipsToBounds = true
 
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,17 +33,9 @@ class ViewController: UIViewController {
         super.viewDidLayoutSubviews()
 
     }
-
-
 }
 
 extension ViewController {
-    
-//    private func configureButton()
-//    {
-//        self.image.layer.cornerRadius = 0.5 * self.image.bounds.size.width
-//        self.image.clipsToBounds = true
-//    }
     
     func setUpImageViewAnimation() {
         

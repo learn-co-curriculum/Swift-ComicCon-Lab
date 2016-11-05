@@ -14,25 +14,35 @@ class ComicTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         store.getCharacters { (success) in
+            
             if success{
+                
                 OperationQueue.main.addOperation({
                     self.tableView.reloadData()
-                    
                 })
             }
         }
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let selectedCharacter = store.characters[indexPath.row]
+        
+       selectedCharacter.convertToSaved()
+        
+//        store.fetchData()
+//        print(store.savedCharacters)
+        
+        store.saveContext()
+//        print("after saved: \(store.savedCharacters)")
+
     }
     
     // MARK: - Table view data source
@@ -50,7 +60,7 @@ class ComicTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
-        
+
         cell.textLabel?.text = store.characters[indexPath.row].name
         cell.imageView?.image = store.characters[indexPath.row].image
         

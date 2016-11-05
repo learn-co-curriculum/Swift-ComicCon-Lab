@@ -16,11 +16,11 @@ class ComicVineAPIClient{
         let url = URL(string: stringUrl)
         let session = URLSession.shared
         
-        let task = session.dataTask(with: url!) { (data, response, error) in
+        let task = session.dataTask(with: url!) { (data, response, failed) in
             
             do{
                 
-                let results = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: Any]
+                let results = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
                 
                 if let results = results{
                     
@@ -32,7 +32,8 @@ class ComicVineAPIClient{
                     }
                 }
             }catch{
-                print(error)
+                
+                print(error.localizedDescription)
             }
         }
         

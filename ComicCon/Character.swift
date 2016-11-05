@@ -11,12 +11,25 @@ import UIKit
 
 class Character{
     
+    let store = DataStore.sharedInstance
+    
     let name: String
     let image: UIImage?
+    let imageAddress: String?
     
-    init(name:String, image: UIImage?) {
+    init(name:String, image: UIImage?, imageAddress: String?) {
         
         self.name =  name
         self.image = image
+        self.imageAddress = imageAddress
     }
+    
+    func convertToSaved() {
+        
+        let savedCharacter = SavedCharacter(context: store.persistentContainer.viewContext)
+        
+        savedCharacter.name = self.name
+        savedCharacter.imageAddress = self.imageAddress
+    }
+    
 }
